@@ -1,0 +1,20 @@
+#!/bin/bash
+# File executed by deluge on torrent-completed
+echo "NAPISY START"
+torrentid=$1
+torrentname=$2
+torrentpath=$3
+
+log=/home/pi/napisy.log
+fullpath="$torrentpath/$torrentname/"
+now=$(date +"%Y-%m-%d %H:%M")
+
+echo "$now  Sciagnolem $fullpath" >> $log
+
+echo "cd $fullpath"
+cd "$fullpath"
+
+napi2srt.py . &>> $log
+
+echo "NAPISY STOP"
+exit 0
